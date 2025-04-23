@@ -1,0 +1,404 @@
+/* Import Inconsolata font */
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('./assets/fonts/Inconsolata-VariableFont_wdth\,wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+}
+
+/* CSS Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Colors from style guide */
+  --neutral-0: hsl(0, 0%, 100%);
+  --neutral-300: hsl(252, 6%, 83%);
+  --neutral-500: hsl(245, 15%, 58%);
+  --neutral-700: hsl(245, 19%, 35%);
+  --neutral-900: hsl(248, 70%, 10%);
+  --orange-500: hsl(7, 88%, 67%);
+  --orange-700: hsl(7, 71%, 60%);
+  --error-color: hsl(0, 100%, 65%);
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  background-color: var(--neutral-900);
+  color: var(--neutral-0);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('./assets/images/background-desktop.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Logo and Typography */
+.logo {
+  margin-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--orange-500), var(--neutral-0));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+  max-width: 90%;
+}
+
+.intro-text {
+  font-size: 1.25rem;
+  color: var(--neutral-300);
+  margin-bottom: 3rem;
+}
+
+/* Form Styles */
+.form-container {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.form-field {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--neutral-0);
+  margin-bottom: 0.75rem;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 1.25rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--neutral-0);
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-color: var(--orange-500);
+}
+
+input::placeholder {
+  color: var(--neutral-500);
+}
+
+/* Error Styles */
+.form-field.error input[type="text"],
+.form-field.error input[type="email"] {
+  border-color: var(--error-color);
+}
+
+.form-field.error .upload-area {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.error-message::before {
+  content: url('./assets/images/icon-info.svg');
+  margin-right: 0.5rem;
+}
+
+/* Upload Area Styles */
+.upload-field {
+  margin-bottom: 2.5rem;
+}
+
+.upload-area {
+  border: 2px dashed var(--neutral-500);
+  border-radius: 8px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.upload-area:hover,
+.upload-area.highlight {
+  border-color: var(--orange-500);
+}
+
+.upload-icon {
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.form-hint {
+  font-size: 0.9rem;
+  color: var(--neutral-500);
+}
+
+/* Button Styles */
+.btn-submit {
+  width: 100%;
+  padding: 1.25rem;
+  background-color: var(--orange-500);
+  color: var(--neutral-0);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-submit:hover {
+  background-color: var(--orange-700);
+}
+
+.btn-submit:focus {
+  outline: 2px solid var(--neutral-0);
+  outline-offset: 2px;
+}
+
+/* Ticket Styles */
+.ticket-container {
+  padding: 2rem 0;
+}
+
+.ticket-container.hidden {
+  display: none;
+}
+
+.ticket-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.ticket-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ticket-header p {
+  font-size: 1.2rem;
+  color: var(--neutral-300);
+}
+
+.ticket {
+  background: url('./assets/images/pattern-ticket.svg') no-repeat center;
+  background-size: 100% 100%;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.ticket-inner {
+  background-color: var(--neutral-900);
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-user {
+  display: flex;
+  align-items: center;
+}
+
+.ticket-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1.5rem;
+}
+
+.ticket-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ticket-user-info .user-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-user-info .user-github {
+  color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.user-github::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url('./assets/images/icon-github.svg') no-repeat center;
+  background-size: contain;
+  margin-right: 0.5rem;
+}
+
+.ticket-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticket-logo {
+  margin-bottom: 1.5rem;
+}
+
+.ticket-date {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 700px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image: url('./assets/images/background-tablet.png');
+  }
+
+  .container {
+    max-width: 540px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    max-width: 100%;
+  }
+
+  .ticket-inner {
+    padding: 2rem;
+  }
+
+  .ticket-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .ticket-user-info .user-name {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-image: url('./assets/images/background-mobile.png');
+    padding: 1.5rem;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .upload-area {
+    padding: 2rem 1rem;
+  }
+
+  .ticket-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .ticket-header p {
+    font-size: 1rem;
+  }
+
+  .ticket {
+    padding: 1.5rem;
+  }
+
+  .ticket-inner {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .ticket-user {
+    margin-bottom: 2rem;
+  }
+
+  .ticket-avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+  }
+
+  .ticket-user-info .user-name {
+    font-size: 1.2rem;
+  }
+
+  .ticket-date {
+    font-size: 1rem;
+  }
+}
