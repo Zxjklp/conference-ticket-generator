@@ -25,88 +25,127 @@
   --orange-500: hsl(7, 88%, 67%);
   --orange-700: hsl(7, 71%, 60%);
   --error-color: hsl(0, 100%, 65%);
+
+  /* Custom colors from screenshot */
+  --deep-purple-900: hsl(260, 50%, 13%);
+  --deep-purple-800: hsl(260, 42%, 18%);
 }
 
 body {
   font-family: 'Inconsolata', monospace;
-  background-color: var(--neutral-900);
   color: var(--neutral-0);
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('./assets/images/background-desktop.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--deep-purple-900);
   padding: 2rem;
+}
+
+/* Dark purple background with vertical stripes effect */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(to right,
+      var(--deep-purple-900),
+      var(--deep-purple-900) 20px,
+      var(--deep-purple-800) 20px,
+      var(--deep-purple-800) 40px);
+  z-index: -2;
+}
+
+/* Background decorative elements */
+body::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    url('./assets/images/pattern-circle.svg') no-repeat bottom right,
+    url('./assets/images/pattern-squiggly-line-top.svg') no-repeat top right,
+    url('./assets/images/pattern-squiggly-line-bottom-desktop.svg') no-repeat bottom left;
+  background-size: 20% auto, 45% auto, 45% auto;
+  z-index: -1;
+  pointer-events: none;
 }
 
 main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  padding-top: 2rem;
 }
 
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 550px;
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* Logo and Typography */
 .logo {
-  margin-bottom: 2.5rem;
+  margin: 1.5rem 0 3rem;
+  text-align: center;
+}
+
+.logo img {
+  height: 32px;
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(to right, var(--orange-500), var(--neutral-0));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.2;
-  max-width: 90%;
+  text-align: center;
+  color: var(--neutral-0);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
 }
 
 .intro-text {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--neutral-300);
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
 
 /* Form Styles */
 .form-container {
   width: 100%;
-  padding: 2rem 0;
 }
 
 .form-field {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
 label {
   display: block;
-  font-size: 20px;
+  font-size: 1.125rem;
   font-weight: 500;
   color: var(--neutral-0);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 input[type="text"],
 input[type="email"] {
   width: 100%;
-  padding: 1.25rem;
+  padding: 1rem;
   border: 2px solid var(--neutral-500);
   border-radius: 8px;
   background-color: transparent;
   color: var(--neutral-0);
   font-family: 'Inconsolata', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   outline: none;
 }
 
@@ -131,31 +170,36 @@ input::placeholder {
 
 .error-message {
   color: var(--error-color);
-  font-size: 0.9rem;
-  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
 }
 
 .error-message::before {
-  content: url('./assets/images/icon-info.svg');
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('./assets/images/icon-info.svg') no-repeat center;
+  background-size: contain;
   margin-right: 0.5rem;
 }
 
 /* Upload Area Styles */
 .upload-field {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .upload-area {
   border: 2px dashed var(--neutral-500);
   border-radius: 8px;
-  padding: 3rem 1.5rem;
+  padding: 2.5rem 1rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .upload-area:hover,
@@ -165,7 +209,14 @@ input::placeholder {
 
 .upload-icon {
   display: block;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1rem;
+  width: 32px;
+  height: 32px;
+}
+
+.upload-area p {
+  font-size: 1rem;
+  color: var(--neutral-0);
 }
 
 .file-input {
@@ -179,20 +230,28 @@ input::placeholder {
 }
 
 .form-hint {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
 }
 
 /* Button Styles */
 .btn-submit {
   width: 100%;
-  padding: 1.25rem;
+  padding: 1rem;
   background-color: var(--orange-500);
   color: var(--neutral-0);
   border: none;
   border-radius: 8px;
   font-family: 'Inconsolata', monospace;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -218,31 +277,31 @@ input::placeholder {
 }
 
 .ticket-header {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   text-align: center;
 }
 
 .ticket-header h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 .ticket-header p {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   color: var(--neutral-300);
 }
 
 .ticket {
   background: url('./assets/images/pattern-ticket.svg') no-repeat center;
   background-size: 100% 100%;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 16px;
 }
 
 .ticket-inner {
   background-color: var(--neutral-900);
   border-radius: 12px;
-  padding: 2.5rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -254,11 +313,11 @@ input::placeholder {
 }
 
 .ticket-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 }
 
 .ticket-avatar img {
@@ -269,22 +328,22 @@ input::placeholder {
 
 .ticket-user-info .user-name {
   font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .ticket-user-info .user-github {
   color: var(--neutral-500);
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .user-github::before {
   content: '';
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: url('./assets/images/icon-github.svg') no-repeat center;
   background-size: contain;
   margin-right: 0.5rem;
@@ -297,57 +356,26 @@ input::placeholder {
 }
 
 .ticket-logo {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ticket-logo img {
+  height: 32px;
 }
 
 .ticket-date {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Media Queries for smaller screens */
-@media (max-width: 1024px) {
-  .container {
-    max-width: 700px;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-}
-
 @media (max-width: 768px) {
-  body {
-    background-image: url('./assets/images/background-tablet.png');
-  }
-
-  .container {
-    max-width: 540px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    max-width: 100%;
-  }
-
-  .ticket-inner {
-    padding: 2rem;
-  }
-
-  .ticket-avatar {
-    width: 70px;
-    height: 70px;
-  }
-
-  .ticket-user-info .user-name {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    background-image: url('./assets/images/background-mobile.png');
-    padding: 1.5rem;
+  body::after {
+    background:
+      url('./assets/images/pattern-circle.svg') no-repeat bottom right,
+      url('./assets/images/pattern-squiggly-line-top.svg') no-repeat top right,
+      url('./assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg') no-repeat bottom left;
+    background-size: 60% auto, 60% auto, 60% auto;
   }
 
   .container {
@@ -355,50 +383,30 @@ input::placeholder {
   }
 
   h1 {
-    font-size: 2rem;
-  }
-
-  .intro-text {
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .upload-area {
-    padding: 2rem 1rem;
-  }
-
-  .ticket-header h2 {
-    font-size: 1.75rem;
-  }
-
-  .ticket-header p {
-    font-size: 1rem;
-  }
-
-  .ticket {
-    padding: 1.5rem;
+    font-size: 2.25rem;
   }
 
   .ticket-inner {
     flex-direction: column;
-    padding: 1.5rem;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 
-  .ticket-user {
-    margin-bottom: 2rem;
+  .ticket-details {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
   }
 
-  .ticket-avatar {
-    width: 60px;
-    height: 60px;
-    margin-right: 1rem;
+  h1 {
+    font-size: 1.75rem;
   }
 
-  .ticket-user-info .user-name {
-    font-size: 1.2rem;
-  }
-
-  .ticket-date {
-    font-size: 1rem;
+  .ticket-header h2 {
+    font-size: 1.5rem;
   }
 }
