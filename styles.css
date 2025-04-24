@@ -25,10 +25,6 @@
   --orange-500: hsl(7, 88%, 67%);
   --orange-700: hsl(7, 71%, 60%);
   --error-color: hsl(0, 100%, 65%);
-
-  /* Custom colors from screenshot */
-  --deep-purple-900: hsl(260, 50%, 13%);
-  --deep-purple-800: hsl(260, 42%, 18%);
 }
 
 body {
@@ -41,11 +37,34 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   position: relative;
-  background-image: url('./assets/images/background-desktop.png');
+  background-color: rgba(25, 15, 40, 1);
+}
+
+/* Dark purple background image */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('./assets/images/background-desktop.png') no-repeat center center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: var(--deep-purple-900);
+  z-index: -3;
+}
+
+/* Decorative patterns overlay */
+body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    url('./assets/images/pattern-circle.svg') no-repeat right bottom,
+    url('./assets/images/pattern-squiggly-line-top.svg') no-repeat right top,
+    url('./assets/images/pattern-squiggly-line-bottom-desktop.svg') no-repeat left bottom;
+  background-size: 25% auto, 40% auto, 40% auto;
+  pointer-events: none;
 }
 
 main {
@@ -54,17 +73,35 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 1rem;
+  padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+
+/* Pattern lines background for the container */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  background: url('./assets/images/pattern-lines.svg') repeat-x center;
+  background-size: auto 100%;
+  z-index: -1;
+  opacity: 0.15;
 }
 
 /* Logo and Typography */
@@ -74,7 +111,7 @@ main {
 }
 
 .logo img {
-  height: 30px;
+  height: 25px;
 }
 
 h1 {
@@ -99,20 +136,21 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 1rem;
 }
 
 #ticket-form {
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
 }
 
 .form-field {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 label {
   display: block;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--neutral-0);
   margin-bottom: 0.5rem;
@@ -121,8 +159,8 @@ label {
 input[type="text"],
 input[type="email"] {
   width: 100%;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--neutral-0);
@@ -172,11 +210,11 @@ input::placeholder {
 
 /* Upload Area Styles */
 .upload-field {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .upload-area {
-  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   padding: 2rem 1rem;
   text-align: center;
@@ -184,7 +222,7 @@ input::placeholder {
   transition: all 0.3s ease;
   position: relative;
   margin-bottom: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .upload-area:hover,
@@ -231,7 +269,7 @@ input::placeholder {
 /* Button Styles */
 .btn-submit {
   width: 100%;
-  padding: 1rem;
+  padding: 0.9rem;
   background-color: var(--orange-500);
   color: var(--neutral-0);
   border: none;
@@ -241,7 +279,7 @@ input::placeholder {
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .btn-submit:hover {
@@ -357,12 +395,20 @@ input::placeholder {
 
 /* Media Queries for smaller screens */
 @media (max-width: 768px) {
-  body {
+  body::after {
+    background:
+      url('./assets/images/pattern-circle.svg') no-repeat right bottom,
+      url('./assets/images/pattern-squiggly-line-top.svg') no-repeat right top,
+      url('./assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg') no-repeat left bottom;
+    background-size: 35% auto, 50% auto, 50% auto;
+  }
+
+  body::before {
     background-image: url('./assets/images/background-tablet.png');
   }
 
   .container {
-    padding: 0 1.5rem;
+    max-width: 400px;
   }
 
   h1 {
@@ -381,12 +427,16 @@ input::placeholder {
 }
 
 @media (max-width: 480px) {
-  body {
+  body::before {
     background-image: url('./assets/images/background-mobile.png');
   }
 
+  body::after {
+    background-size: 40% auto, 60% auto, 60% auto;
+  }
+
   .container {
-    padding: 0 1rem;
+    max-width: 320px;
   }
 
   h1 {
