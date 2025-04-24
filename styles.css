@@ -35,71 +35,46 @@ body {
   font-family: 'Inconsolata', monospace;
   color: var(--neutral-0);
   line-height: 1.5;
+  padding: 2rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   position: relative;
+  background-image: url('./assets/images/background-desktop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--deep-purple-900);
-  padding: 2rem;
-}
-
-/* Dark purple background with vertical stripes effect */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(to right,
-      var(--deep-purple-900),
-      var(--deep-purple-900) 20px,
-      var(--deep-purple-800) 20px,
-      var(--deep-purple-800) 40px);
-  z-index: -2;
-}
-
-/* Background decorative elements */
-body::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    url('./assets/images/pattern-circle.svg') no-repeat bottom right,
-    url('./assets/images/pattern-squiggly-line-top.svg') no-repeat top right,
-    url('./assets/images/pattern-squiggly-line-bottom-desktop.svg') no-repeat bottom left;
-  background-size: 20% auto, 45% auto, 45% auto;
-  z-index: -1;
-  pointer-events: none;
 }
 
 main {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .container {
   width: 100%;
-  max-width: 550px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Logo and Typography */
 .logo {
-  margin: 1.5rem 0 3rem;
+  margin: 2rem 0;
   text-align: center;
 }
 
 .logo img {
-  height: 32px;
+  height: 30px;
 }
 
 h1 {
@@ -108,24 +83,31 @@ h1 {
   text-align: center;
   color: var(--neutral-0);
   line-height: 1.15;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .intro-text {
   font-size: 1.125rem;
   color: var(--neutral-300);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 /* Form Styles */
 .form-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#ticket-form {
+  width: 100%;
+  max-width: 480px;
 }
 
 .form-field {
   margin-bottom: 1.5rem;
-  position: relative;
 }
 
 label {
@@ -140,18 +122,20 @@ input[type="text"],
 input[type="email"] {
   width: 100%;
   padding: 1rem;
-  border: 2px solid var(--neutral-500);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.05);
   color: var(--neutral-0);
   font-family: 'Inconsolata', monospace;
   font-size: 1rem;
   outline: none;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus {
   border-color: var(--orange-500);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 input::placeholder {
@@ -192,30 +176,32 @@ input::placeholder {
 }
 
 .upload-area {
-  border: 2px dashed var(--neutral-500);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   margin-bottom: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .upload-area:hover,
 .upload-area.highlight {
   border-color: var(--orange-500);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .upload-icon {
   display: block;
-  margin: 0 auto 1rem;
-  width: 32px;
-  height: 32px;
+  margin: 0 auto 0.75rem;
+  width: 24px;
+  height: 24px;
 }
 
 .upload-area p {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: var(--neutral-0);
 }
 
@@ -230,15 +216,15 @@ input::placeholder {
 }
 
 .form-hint {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--neutral-500);
   display: flex;
   align-items: center;
 }
 
 .info-icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   margin-right: 0.5rem;
 }
 
@@ -255,7 +241,7 @@ input::placeholder {
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .btn-submit:hover {
@@ -270,6 +256,7 @@ input::placeholder {
 /* Ticket Styles */
 .ticket-container {
   padding: 2rem 0;
+  width: 100%;
 }
 
 .ticket-container.hidden {
@@ -282,7 +269,7 @@ input::placeholder {
 }
 
 .ticket-header h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
   margin-bottom: 1rem;
 }
 
@@ -356,34 +343,30 @@ input::placeholder {
 }
 
 .ticket-logo {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .ticket-logo img {
-  height: 32px;
+  height: 24px;
 }
 
 .ticket-date {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 /* Media Queries for smaller screens */
 @media (max-width: 768px) {
-  body::after {
-    background:
-      url('./assets/images/pattern-circle.svg') no-repeat bottom right,
-      url('./assets/images/pattern-squiggly-line-top.svg') no-repeat top right,
-      url('./assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg') no-repeat bottom left;
-    background-size: 60% auto, 60% auto, 60% auto;
+  body {
+    background-image: url('./assets/images/background-tablet.png');
   }
 
   .container {
-    max-width: 100%;
+    padding: 0 1.5rem;
   }
 
   h1 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
   }
 
   .ticket-inner {
@@ -398,15 +381,19 @@ input::placeholder {
 }
 
 @media (max-width: 480px) {
+  body {
+    background-image: url('./assets/images/background-mobile.png');
+  }
+
   .container {
     padding: 0 1rem;
   }
 
   h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .ticket-header h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 }
