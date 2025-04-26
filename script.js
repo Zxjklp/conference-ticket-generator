@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formSection = document.getElementById("form-section");
   const ticketSection = document.getElementById("ticket-section");
   const uploadArea = document.getElementById("upload-area");
-  const fileInput = document.getElementById("avatar");
+  let fileInput = document.getElementById("avatar");
 
   // Ticket info elements
   const ticketName = document.getElementById("ticket-name");
@@ -72,13 +72,92 @@ document.addEventListener("DOMContentLoaded", () => {
       // If valid, show preview
       const reader = new FileReader();
       reader.onload = function (e) {
-        // You could add a preview here if needed
+        // Clear the upload area
+        uploadArea.innerHTML = "";
+
+        // Create and add the image preview
+        const imgPreview = document.createElement("img");
+        imgPreview.src = e.target.result;
+        imgPreview.className = "avatar-preview";
+        imgPreview.alt = "Avatar Preview";
+        uploadArea.appendChild(imgPreview);
+
+        // Create button container
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "avatar-buttons";
+
+        // Create Remove button
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "btn-remove";
+        removeBtn.textContent = "Remove image";
+        removeBtn.addEventListener("click", removeImage);
+
+        // Create Change button
+        const changeBtn = document.createElement("button");
+        changeBtn.type = "button";
+        changeBtn.className = "btn-change";
+        changeBtn.textContent = "Change image";
+        changeBtn.addEventListener("click", changeImage);
+
+        // Add buttons to container
+        buttonContainer.appendChild(removeBtn);
+        buttonContainer.appendChild(changeBtn);
+
+        // Add button container to upload area
+        uploadArea.appendChild(buttonContainer);
+
+        // Make sure error is cleared
         clearError(fileInput);
       };
       reader.readAsDataURL(file);
       return true;
     }
     return false;
+  }
+
+  // Function to restore the original upload area
+  function restoreUploadArea() {
+    uploadArea.innerHTML = `
+      <img src="./assets/images/icon-upload.svg" alt="" class="upload-icon">
+      <p>Drag and drop or click to upload</p>
+      <input type="file" id="avatar" name="avatar" accept="image/jpeg, image/png" class="file-input">
+    `;
+
+    // Re-assign the file input variable since we've replaced the DOM element
+    fileInput = document.getElementById("avatar");
+
+    // Re-attach event listeners
+    fileInput.addEventListener("change", validateFileUpload);
+
+    // Re-attach drag and drop handlers
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+      uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      uploadArea.addEventListener(eventName, highlight, false);
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    uploadArea.addEventListener("drop", handleDrop, false);
+  }
+
+  // Function to remove the uploaded image
+  function removeImage() {
+    // Clear the file input value
+    fileInput.value = "";
+
+    // Restore original upload area
+    restoreUploadArea();
+  }
+
+  // Function to trigger the file input click
+  function changeImage() {
+    fileInput.click();
   }
 
   // Form validation
@@ -161,10 +240,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Create and append error message
-    const errorMessage = document.createElement("p");
+    const errorMessage = document.createElement("div");
     errorMessage.className = "error-message";
-    errorMessage.textContent = message;
+
+    // Create icon element
+    const iconSpan = document.createElement("span");
+    iconSpan.className = "error-icon";
+
+    // Add text span
+    const textSpan = document.createElement("span");
+    textSpan.textContent = message;
+
+    // Append elements to error message
+    errorMessage.appendChild(iconSpan);
+    errorMessage.appendChild(textSpan);
+
     formField.appendChild(errorMessage);
+
+    // Hide the form hint if this is an avatar upload error
+    if (inputElement.id === "avatar") {
+      const formHint = formField.querySelector(".form-hint");
+      if (formHint) {
+        formHint.style.display = "none";
+      }
+    }
 
     // Ensure the error is announced to screen readers
     errorMessage.setAttribute("role", "alert");
@@ -177,6 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorMessage = formField.querySelector(".error-message");
     if (errorMessage) {
       errorMessage.remove();
+    }
+
+    // Show the form hint again if this was an avatar upload field
+    if (inputElement.id === "avatar") {
+      const formHint = formField.querySelector(".form-hint");
+      if (formHint) {
+        formHint.style.display = "";
+      }
     }
   }
 

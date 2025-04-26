@@ -4,6 +4,7 @@
   src: url('./assets/fonts/Inconsolata-VariableFont_wdth\,wght.ttf') format('truetype');
   font-weight: 400 800;
   font-style: normal;
+  font-display: swap;
 }
 
 /* CSS Reset and Base Styles */
@@ -31,7 +32,6 @@ body {
   font-family: 'Inconsolata', monospace;
   color: var(--neutral-0);
   line-height: 1.5;
-  padding: 2rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -60,10 +60,11 @@ body::after {
   inset: 0;
   z-index: -1;
   background:
-    url('./assets/images/pattern-circle.svg') no-repeat right bottom,
+    url('./assets/images/pattern-circle.svg') no-repeat 10% -10%,
+    url('./assets/images/pattern-circle.svg') no-repeat 76% 70%,
     url('./assets/images/pattern-squiggly-line-top.svg') no-repeat right top,
     url('./assets/images/pattern-squiggly-line-bottom-desktop.svg') no-repeat left bottom;
-  background-size: 25% auto, 40% auto, 40% auto;
+  background-size: 15% auto, 15% auto, 40% auto, 40% auto;
   pointer-events: none;
 }
 
@@ -80,9 +81,9 @@ main {
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
-  padding: 0;
+  padding: 2rem 0 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,7 +102,7 @@ main {
   background: url('./assets/images/pattern-lines.svg') repeat-x center;
   background-size: auto 100%;
   z-index: -1;
-  opacity: 0.15;
+  opacity: 0.65;
 }
 
 /* Logo and Typography */
@@ -139,45 +140,49 @@ h1 {
   padding: 0 1rem;
 }
 
-#ticket-form {
+.ticket-form {
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
 }
 
+/* Form input styling */
 .form-field {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 label {
   display: block;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--neutral-0);
   margin-bottom: 0.5rem;
+  color: #fff;
+  font-weight: 500;
 }
 
 input[type="text"],
 input[type="email"] {
   width: 100%;
-  padding: 0.9rem;
+  padding: 1rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--neutral-0);
-  font-family: 'Inconsolata', monospace;
+  border-radius: 0.5rem;
+  background-color: rgba(50, 35, 74, 0.6);
+  color: #fff;
   font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover {
+  background-color: rgba(60, 45, 85, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus {
-  border-color: var(--orange-500);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-input::placeholder {
-  color: var(--neutral-500);
+  outline: none;
+  border-color: var(--neutral-0);
+  background-color: rgba(50, 35, 74, 0.8);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
 /* Error Styles */
@@ -208,27 +213,35 @@ input::placeholder {
   margin-right: 0.5rem;
 }
 
-/* Upload Area Styles */
+/* Upload area styling */
 .upload-field {
-  margin-bottom: 1.25rem;
+  position: relative;
 }
 
 .upload-area {
+  width: 100%;
   border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 2rem 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
   margin-bottom: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.upload-area:hover,
-.upload-area.highlight {
-  border-color: var(--orange-500);
-  background-color: rgba(255, 255, 255, 0.05);
+.upload-area:hover {
+  background-color: rgba(60, 45, 85, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.upload-area:focus-within {
+  outline: none;
+  border-color: var(--neutral-0);
+  background-color: rgba(50, 35, 74, 0.8);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
 .upload-icon {
@@ -236,11 +249,64 @@ input::placeholder {
   margin: 0 auto 0.75rem;
   width: 24px;
   height: 24px;
+  background-color: rgba(50, 35, 74, 0.3);
+  border-radius: 10px;
+  padding: 12px;
+  box-sizing: content-box;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .upload-area p {
   font-size: 0.875rem;
+  color: var(--neutral-500);
+}
+
+/* Avatar preview styles */
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.btn-remove,
+.btn-change {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-remove {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+.btn-remove:hover {
+  background-color: rgba(255, 107, 107, 0.25);
+}
+
+.btn-change {
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--neutral-0);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-change:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .file-input {
@@ -271,7 +337,7 @@ input::placeholder {
   width: 100%;
   padding: 0.9rem;
   background-color: var(--orange-500);
-  color: var(--neutral-0);
+  color: var(--neutral-900);
   border: none;
   border-radius: 8px;
   font-family: 'Inconsolata', monospace;
@@ -408,11 +474,23 @@ input::placeholder {
   }
 
   .container {
-    max-width: 400px;
+    max-width: 600px;
+  }
+
+  .logo img {
+    height: 20px;
   }
 
   h1 {
     font-size: 2.5rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .ticket-form {
+    max-width: 350px;
   }
 
   .ticket-inner {
@@ -439,8 +517,12 @@ input::placeholder {
     max-width: 320px;
   }
 
+  .logo img {
+    height: 18px;
+  }
+
   h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .ticket-header h2 {
