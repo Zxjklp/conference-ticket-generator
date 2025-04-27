@@ -35,7 +35,9 @@
 
         <p class="intro-text">Secure your spot at next year's biggest coding conference.</p>
 
-        <form class="ticket-form" id="ticket-form" novalidate>
+        <form class="ticket-form"
+          id="ticket-form"
+          novalidate>
           <div class="form-field upload-field">
             <label for="avatar">Upload Avatar</label>
             <div class="upload-area"
@@ -69,6 +71,7 @@
               id="email"
               name="email"
               placeholder="example@email.com"
+              autocomplete="email"
               required>
           </div>
 
@@ -91,33 +94,46 @@
       <div class="ticket-container hidden"
         id="ticket-section">
         <div class="ticket-header">
-          <h2>Congrats, <span id="ticket-name"></span>! Your ticket is ready.</h2>
-          <p>We've emailed your ticket to <span id="ticket-email"></span> and will send updates in the run up to the
+          <div class="logo">
+            <img src="./assets/images/logo-full.svg"
+              alt="Coding Conference 2025 Logo"
+              class="logo-image">
+          </div>
+          <h2>Congrats, <span class="ticket-name"
+              id="ticket-name"></span> Your ticket is ready.</h2>
+          <p>We've emailed your ticket to <span class="ticket-email"
+              id="ticket-email"></span> and will send updates in the run up to the
             event.</p>
         </div>
 
         <div class="ticket">
           <div class="ticket-inner">
-            <div class="ticket-user">
-              <div class="ticket-avatar">
-                <img id="ticket-avatar-img"
-                  src="./assets/images/image-avatar.jpg"
-                  alt="User Avatar">
+            <div class="ticket-content">
+              <div class="ticket-left">
+                <div class="ticket-logo">
+                  <img src="./assets/images/logo-mark.svg"
+                    alt="Coding Conference Logo"
+                    class="logo-mark">
+                  <span class="logo-text">Coding Conf</span>
+                </div>
+                <div class="ticket-date">Jan 31, 2025 / Austin, TX</div>
+                <div class="ticket-user-container">
+                  <div class="ticket-avatar">
+                    <img id="ticket-avatar-img"
+                      src="./assets/images/image-avatar.jpg"
+                      alt="User Avatar">
+                  </div>
+                  <div class="ticket-user-info">
+                    <h3 class="user-name"
+                      id="display-name"></h3>
+                    <p class="user-github"
+                      id="display-github"></p>
+                  </div>
+                </div>
               </div>
-              <div class="ticket-user-info">
-                <p class="user-name"
-                  id="display-name"></p>
-                <p class="user-github"
-                  id="display-github"></p>
+              <div class="ticket-right">
+                <div class="ticket-number">#01608</div>
               </div>
-            </div>
-
-            <div class="ticket-details">
-              <div class="ticket-logo">
-                <img src="./assets/images/logo-full.svg"
-                  alt="Coding Conference 2025 Logo">
-              </div>
-              <p class="ticket-date">Jan 31, 2025 / Austin, TX</p>
             </div>
           </div>
         </div>

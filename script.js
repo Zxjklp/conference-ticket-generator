@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateTicket(name, email, github, avatarFile) {
     // Update ticket information
-    ticketName.textContent = name;
+    ticketName.textContent = name + "!";
     ticketEmail.textContent = email;
     displayName.textContent = name;
     displayGithub.textContent = github;
