@@ -32,6 +32,7 @@ body {
   font-family: 'Inconsolata', monospace;
   color: var(--neutral-0);
   line-height: 1.5;
+  padding: .5rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -360,14 +361,12 @@ input[type="email"]:focus {
 }
 
 .ticket-header {
-  max-width: 600px;
-  margin: 0 auto;
   margin-bottom: 2.5rem;
   text-align: center;
 }
 
 .ticket-header h2 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   line-height: initial;
   margin-bottom: 1rem;
 }
@@ -392,11 +391,13 @@ input[type="email"]:focus {
 
 .ticket {
   background: url('./assets/images/pattern-ticket.svg') no-repeat center;
-  background-size: 100% 100%;
+  background-size: contain;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
+  position: relative;
+  min-height: 220px;
 }
 
 .ticket-inner {
@@ -406,6 +407,8 @@ input[type="email"]:focus {
 
 .ticket-content {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
@@ -415,15 +418,14 @@ input[type="email"]:focus {
 .ticket-left {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   width: 100%;
 }
 
 .ticket-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 0.9rem;
 }
 
 .logo-mark {
@@ -440,8 +442,8 @@ input[type="email"]:focus {
 .ticket-date {
   font-weight: 500;
   font-size: 0.875rem;
-  color: var(--neutral-0);
-  margin-bottom: 1.5rem;
+  color: var(--neutral-300);
+  margin-bottom: 2.5rem;
 }
 
 .ticket-user-container {
@@ -454,9 +456,8 @@ input[type="email"]:focus {
   width: 60px;
   height: 60px;
   min-width: 60px;
-  border-radius: 50%;
+  border-radius: 20%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .ticket-avatar img {
@@ -478,7 +479,7 @@ input[type="email"]:focus {
 }
 
 .user-github {
-  color: var(--neutral-500);
+  color: var(--neutral-300);
   display: flex;
   align-items: center;
   font-size: 0.875rem;
@@ -487,8 +488,8 @@ input[type="email"]:focus {
 .user-github::before {
   content: '';
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: url('./assets/images/icon-github.svg') no-repeat center;
   background-size: contain;
   margin-right: 0.5rem;
@@ -497,13 +498,18 @@ input[type="email"]:focus {
 .ticket-right {
   position: absolute;
   top: 0;
-  right: 0;
+  right: -36px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .ticket-number {
-  font-size: 0.875rem;
-  color: var(--neutral-500);
+  font-size: 1.75rem;
+  color: rgba(150, 140, 180, 0.6);
   font-weight: 500;
+  transform: rotate(90deg);
+  letter-spacing: 2px;
 }
 
 /* Media Queries for smaller screens */
@@ -544,6 +550,38 @@ input[type="email"]:focus {
     max-width: 400px;
     padding: 1.5rem;
   }
+
+  .ticket-logo {
+    margin-top: 2rem;
+  }
+
+  .logo-mark {
+    height: 25px;
+    width: auto;
+  }
+
+  .ticket-user-container {
+    margin-bottom: 2rem;
+  }
+
+  .ticket-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .user-name {
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .ticket-right {
+    right: -25px;
+  }
+
+  .ticket-number {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -553,10 +591,6 @@ input[type="email"]:focus {
 
   body::after {
     background-size: 40% auto, 60% auto, 60% auto;
-  }
-
-  .container {
-    max-width: 320px;
   }
 
   .logo img {
@@ -572,19 +606,44 @@ input[type="email"]:focus {
   }
 
   .ticket {
-    max-width: 320px;
     padding: 1.25rem;
+    background-size: 100% 100%;
+    min-height: 180px;
+  }
+
+  .ticket-header {
+    padding: 0 1rem;
+  }
+
+  .ticket-logo {
+    gap: 0.5rem;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .ticket-date {
+    margin-bottom: .5rem;
   }
 
   .ticket-user-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .ticket-avatar {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+  }
+
+  .ticket-right {
+    right: -20px;
+  }
+
+  .ticket-number {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
   }
 }
