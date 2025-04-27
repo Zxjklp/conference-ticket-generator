@@ -10,6 +10,28 @@ const ticketEmail = document.getElementById("ticket-email");
 const displayName = document.getElementById("display-name");
 const displayGithub = document.getElementById("display-github");
 const ticketAvatar = document.getElementById("ticket-avatar-img");
+const ticketNumber = document.querySelector(".ticket-number");
+
+// Initialize the form
+document.addEventListener("DOMContentLoaded", function () {
+  // Add input event listeners to clear errors as user types
+  document.getElementById("full-name").addEventListener("input", function () {
+    clearError(this);
+  });
+
+  document.getElementById("email").addEventListener("input", function () {
+    clearError(this);
+  });
+
+  document.getElementById("github").addEventListener("input", function () {
+    clearError(this);
+  });
+
+  // Clear error when file input changes, before validation
+  fileInput.addEventListener("change", function () {
+    clearError(this);
+  });
+});
 
 // Handle drag and drop for avatar upload
 ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
@@ -18,7 +40,7 @@ const ticketAvatar = document.getElementById("ticket-avatar-img");
 
 function preventDefaults(e) {
   e.preventDefault();
-  e.stopPropagation(); 
+  e.stopPropagation();
 }
 
 ["dragenter", "dragover"].forEach((eventName) => {
@@ -285,12 +307,23 @@ function clearError(inputElement) {
   }
 }
 
+// Function to generate a random ticket number
+function generateRandomTicketNumber() {
+  // Generate a random 6-digit number
+  const randomNumber = Math.floor(100000 + Math.random() * 900000);
+  // Return the formatted ticket number with # prefix
+  return `#${randomNumber}`;
+}
+
 function generateTicket(name, email, github, avatarFile) {
   // Update ticket information
   ticketName.textContent = name + "!";
   ticketEmail.textContent = email;
   displayName.textContent = name;
   displayGithub.textContent = github;
+
+  // Generate and set random ticket number
+  ticketNumber.textContent = generateRandomTicketNumber();
 
   // Set avatar image
   const reader = new FileReader();
