@@ -35,4 +35,4 @@ Users should be able to:
 
 ## Author
 
-- GitHub - [@Zxjklp](https://github.com/Zxjklp)
+- Frontend Mentor - [@Zxjklp](https://www.frontendmentor.io/profile/Zxjklp)
