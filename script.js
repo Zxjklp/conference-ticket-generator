@@ -202,6 +202,12 @@ function handleFormSubmit(e) {
       "Please enter your GitHub username."
     );
     isValid = false;
+  } else if (!github.startsWith("@")) {
+    showError(
+      document.getElementById("github"),
+      "GitHub username must start with @ symbol."
+    );
+    isValid = false;
   } else {
     clearError(document.getElementById("github"));
   }
