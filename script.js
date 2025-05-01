@@ -43,22 +43,6 @@ function preventDefaults(e) {
   e.stopPropagation();
 }
 
-["dragenter", "dragover"].forEach((eventName) => {
-  uploadArea.addEventListener(eventName, highlight, false);
-});
-
-["dragleave", "drop"].forEach((eventName) => {
-  uploadArea.addEventListener(eventName, unhighlight, false);
-});
-
-function highlight() {
-  uploadArea.classList.add("highlight");
-}
-
-function unhighlight() {
-  uploadArea.classList.remove("highlight");
-}
-
 uploadArea.addEventListener("drop", handleDrop, false);
 
 function handleDrop(e) {
@@ -139,12 +123,12 @@ function validateFileUpload() {
 // Function to restore the original upload area
 function restoreUploadArea() {
   uploadArea.innerHTML = `
-      <img src="./assets/images/icon-upload.svg" alt="" class="upload-icon">
+      <img src="./assets/images/icon-upload.svg" alt="" class="upload-icon" width="40" height="40">
       <p>Drag and drop or click to upload</p>
       <input type="file" id="avatar" name="avatar" accept="image/jpeg, image/png" class="file-input">
     `;
 
-  // Re-assign the file input variable since we've replaced the DOM element
+  // Re-assign the file input variable because replaced the DOM element
   fileInput = document.getElementById("avatar");
 
   // Re-attach event listeners
@@ -153,14 +137,6 @@ function restoreUploadArea() {
   // Re-attach drag and drop handlers
   ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
     uploadArea.addEventListener(eventName, preventDefaults, false);
-  });
-
-  ["dragenter", "dragover"].forEach((eventName) => {
-    uploadArea.addEventListener(eventName, highlight, false);
-  });
-
-  ["dragleave", "drop"].forEach((eventName) => {
-    uploadArea.addEventListener(eventName, unhighlight, false);
   });
 
   uploadArea.addEventListener("drop", handleDrop, false);

@@ -506,7 +506,7 @@ input[type="email"]:focus {
 
 .ticket-number {
   font-size: 1.75rem;
-  color: rgba(150, 140, 180, 0.6);
+  color: rgba(210, 206, 224, 0.6);
   font-weight: 500;
   transform: rotate(90deg);
   letter-spacing: 2px;
@@ -619,8 +619,13 @@ input[type="email"]:focus {
     gap: 0.5rem;
   }
 
+  .logo-mark {
+    height: 16px;
+    width: auto;
+  }
+
   .logo-text {
-    font-size: 1.1rem;
+    font-size: .9rem;
   }
 
   .ticket-date {
@@ -629,13 +634,17 @@ input[type="email"]:focus {
 
   .ticket-user-container {
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.8rem;
   }
 
   .ticket-avatar {
-    width: 35px;
-    height: 35px;
-    min-width: 35px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+
+  .ticket-user-info .user-name {
+    margin: 0;
   }
 
   .ticket-right {
