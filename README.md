@@ -19,11 +19,11 @@ Users should be able to:
   
 ## Screenshot
 
-![](./screenshot.png)`)
+![](./screenshot.png)
 
 ## Links
 
-- [Solution](https://zxjklp.github.io/conference-ticket-generator/)
+- [Solution](https://www.frontendmentor.io/solutions/conference-ticket-generator-9u3s9Kkcrf/)
 - [Live Site](https://zxjklp.github.io/conference-ticket-generator/)
 
 ## Built with
@@ -35,4 +35,4 @@ Users should be able to:
 
 ## Author
 
-- GitHub - [@Zxjklp](https://github.com/Zxjklp)
+- Frontend Mentor - [@Zxjklp](https://www.frontendmentor.io/profile/Zxjklp)
