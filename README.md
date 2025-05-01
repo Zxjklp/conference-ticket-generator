@@ -23,7 +23,7 @@ Users should be able to:
 
 ## Links
 
-- [Solution](https://zxjklp.github.io/conference-ticket-generator/)
+- [Solution](https://www.frontendmentor.io/solutions/conference-ticket-generator-9u3s9Kkcrf/)
 - [Live Site](https://zxjklp.github.io/conference-ticket-generator/)
 
 ## Built with
